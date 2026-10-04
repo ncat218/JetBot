@@ -1,0 +1,14 @@
+# Copy measured values into this file. Robot mode refuses any required TBD.
+battery: {i2c_bus: 1, i2c_address: TBD, shunt_ohms: 0.1, warning_voltage: 10.2, critical_voltage: 10.0, sample_interval_sec: 1.0, filter_window: 5, critical_hold_sec: 3.0, max_sample_age_sec: 2.0}
+wifi: {stop_on_wifi_loss: false}
+safety: {max_frame_age_sec: 0.5, motor_command_ttl_sec: 0.3, max_forward_speed: TBD, max_turn_speed: TBD}
+pose: {backend: trt_pose, model_path: TBD, human_pose_json: TBD, input_width: TBD, input_height: TBD}
+gesture: {wave_window_sec: TBD, wave_min_duration_sec: TBD, pointing_window_sec: TBD, confirm_hold_sec: TBD, confirm_static_thr: TBD, elbow_straight_thr: TBD, reach_thr: TBD, level_thr: TBD, direction_thr: TBD, up_thr: TBD, vertical_thr: TBD, wave_amplitude_thr: TBD, wave_jitter_thr: TBD, wave_min_changes: TBD}
+scan: {pulse_duration_sec: TBD, settle_sec: TBD, owner_fov_min_x: TBD, owner_fov_max_x: TBD, candidate_min_x: TBD, candidate_max_x: TBD}
+approach: {owner_stop_bbox_ratio: TBD, servo_gain: TBD}
+delivery: {receiver_stop_bbox_ratio: TBD, servo_gain: TBD}
+decision: {min_dwell_sec: TBD, gesture_gap_grace_sec: TBD, timeout_sec: TBD}
+avoid: {max_attempts: TBD, timeout_sec: TBD, turn_side: TBD, turn_pulse_sec: TBD, settle_sec: TBD, commit_forward_sec: TBD}
+recovery: {owner_lost_sec: TBD, fov_limit_sec: TBD, scan_blocked_sec: TBD}
+collision: {roi: TBD, model_path: TBD, threshold: TBD}
+camera: {source: 0, width: 640, height: 480}

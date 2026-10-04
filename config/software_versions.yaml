@@ -1,0 +1,8 @@
+# Fill from scripts/inspect_platform.sh on the actual JetBot.
+l4t: TBD
+jetpack: TBD
+python: TBD
+jetbot: TBD
+tensorrt: TBD
+torch: TBD
+trt_pose: TBD

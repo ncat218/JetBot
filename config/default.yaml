@@ -1,0 +1,14 @@
+# Safe simulation values only. Never pass this file to robot mode.
+battery: {i2c_bus: 1, i2c_address: null, shunt_ohms: 0.1, warning_voltage: 10.2, critical_voltage: 10.0, sample_interval_sec: 1.0, filter_window: 5, critical_hold_sec: 3.0, max_sample_age_sec: 2.0}
+wifi: {stop_on_wifi_loss: false}
+safety: {max_frame_age_sec: 0.5, motor_command_ttl_sec: 0.3, max_forward_speed: 0.12, max_turn_speed: 0.10}
+pose: {backend: mock, model_path: null, human_pose_json: null, input_width: 224, input_height: 224}
+gesture: {wave_window_sec: 1.5, wave_min_duration_sec: 0.6, pointing_window_sec: 0.3, confirm_hold_sec: 0.7, confirm_static_thr: 0.04, elbow_straight_thr: 145.0, reach_thr: 0.9, level_thr: 0.45, direction_thr: 0.65, up_thr: 0.7, vertical_thr: 0.5, wave_amplitude_thr: 0.35, wave_jitter_thr: 0.07, wave_min_changes: 2}
+scan: {pulse_duration_sec: 0.3, settle_sec: 0.2, owner_fov_min_x: 0.15, owner_fov_max_x: 0.85, candidate_min_x: 0.3, candidate_max_x: 0.7}
+approach: {owner_stop_bbox_ratio: 0.42, servo_gain: 0.6}
+delivery: {receiver_stop_bbox_ratio: 0.5, servo_gain: 0.6}
+decision: {min_dwell_sec: 0.5, gesture_gap_grace_sec: 0.3, timeout_sec: 5.0}
+avoid: {max_attempts: 3, timeout_sec: 6.0, turn_side: LEFT, turn_pulse_sec: 0.25, settle_sec: 0.2, commit_forward_sec: 0.35}
+recovery: {owner_lost_sec: 3.0, fov_limit_sec: 3.0, scan_blocked_sec: 3.0}
+collision: {roi: [0.3, 0.5, 0.7, 1.0], model_path: null, threshold: 0.5}
+camera: {source: 0, width: 640, height: 480}

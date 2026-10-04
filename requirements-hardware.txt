@@ -1,0 +1,5 @@
+# Install only after inspecting the Jetson software stack.
+pi-ina219
+smbus2
+# jetbot, trt_pose, torch, TensorRT, OpenCV and model weights must match JetPack.
+
