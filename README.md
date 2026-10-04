@@ -17,6 +17,42 @@ jetbot_hri/
 
 `default.yaml` contains **simulation-only** values. Robot mode rejects missing calibration and any `TBD`. The IMX219 160° specification is diagonal FOV; usable horizontal view must be measured. Bbox height is a relative stop cue, not metric distance. Pulse turns do not assume encoder/IMU yaw.
 
+## Where the code runs and how to connect
+
+The laptop is used to copy files, inspect logs, and send emergency STOP. **The Jetson Nano on the JetBot runs the Python process locally**; connecting WiFi alone does not install or start this code. There are two stages: launch manually during calibration, then optionally enable boot startup after a safe robot-mode trial.
+
+1. On the JetBot, initially connect a screen/keyboard (or Ethernet), set up WiFi with [setup_wifi.md](scripts/setup_wifi.md), and get its IP with `hostname -I`. If SSH is absent, install/start `openssh-server` using the Jetson OS package manager.
+2. On the Windows laptop, in PowerShell, replace `<user>` and `<jetbot-ip>` with the robot account and its measured IP:
+
+   ```powershell
+   Set-Location 'C:\Users\ADMIN\Documents\CS532'
+   scp -r .\jetbot_hri <user>@<jetbot-ip>:~/
+   ssh <user>@<jetbot-ip>
+   ```
+
+3. The following commands run **inside the SSH shell on JetBot**:
+
+   ```bash
+   cd ~/jetbot_hri
+   bash scripts/inspect_platform.sh
+   python3 -m pip install --user -e .
+   python3 -m jetbot_hri.main --mode dry-run
+   ```
+
+   Expected: the code executes on the Jetson and dry-run reaches `COMPLETE`. Copy calibrated model files separately and set their paths in `config/calibration.yaml`; this repository contains no pose or collision weights. Install JetPack-compatible hardware packages after inspecting versions, then follow Steps 2–7 below. To copy later source changes, repeat `scp -r` while the service is stopped, or set up a remote Git repository.
+
+4. After robot mode has passed manual tests, [jetbot-hri.service.example](scripts/jetbot-hri.service.example) shows optional startup on boot. Replace `JETBOT_USER`, directory and Python interpreter path; validate the unit and **only then** install and enable it on JetBot:
+
+   ```bash
+   sudo cp scripts/jetbot-hri.service.example /etc/systemd/system/jetbot-hri.service
+   sudo systemctl daemon-reload
+   sudo systemctl start jetbot-hri
+   sudo systemctl status jetbot-hri
+   sudo systemctl enable jetbot-hri
+   ```
+
+   `start` runs it now; `enable` starts it after future boots. The unit uses `Restart=no`: an ABORT or emergency shutdown will not silently restart motion. To stop and inspect logs: `sudo systemctl stop jetbot-hri` and `journalctl -u jetbot-hri -n 100 --no-pager`. Check the emergency STOP path and keep physical motor power cut available before enabling startup.
+
 ## Step 0 — install and dry-run (laptop or JetBot)
 
 From this directory:

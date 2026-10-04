@@ -1,0 +1,16 @@
+# Install only after manually validating robot mode on the actual JetBot.
+# Replace JETBOT_USER, the working directory, and Python path for that device.
+[Unit]
+Description=JetBot HRI delivery
+After=network.target
+
+[Service]
+Type=simple
+User=JETBOT_USER
+WorkingDirectory=/home/JETBOT_USER/jetbot_hri
+ExecStart=/usr/bin/python3 -m jetbot_hri.main --mode robot --config config/calibration.yaml --no-display
+Restart=no
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target

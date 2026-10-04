@@ -2,6 +2,7 @@ import argparse
 from dataclasses import asdict
 import json
 from pathlib import Path
+import signal
 import sys
 import time
 
@@ -236,6 +237,10 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
+    def _shutdown_signal(_signum, _frame):
+        raise KeyboardInterrupt()
+
+    signal.signal(signal.SIGTERM, _shutdown_signal)
     try:
         sys.exit(main())
     except KeyboardInterrupt:
