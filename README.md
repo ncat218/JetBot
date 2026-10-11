@@ -2,6 +2,8 @@
 
 This source baseline implements the frozen Wave → approach Owner → load → Point LEFT/RIGHT → pulse scan → Owner raised-arm confirmation → deliver → stop protocol. All motor commands pass through `SafeMotorController`. Dry-run uses no JetBot packages. Robot mode requires a measured calibration and model files; it is **not validated on a physical JetBot yet**.
 
+Current progress, unverified hardware assumptions and next steps: [HANDOFF_2026-10-11.md](HANDOFF_2026-10-11.md).
+
 ## Repository map
 
 ```text
