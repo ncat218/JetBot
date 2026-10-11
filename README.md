@@ -4,6 +4,8 @@ This source baseline implements the frozen Wave → approach Owner → load → 
 
 Current progress, unverified hardware assumptions and next steps: [HANDOFF_2026-10-11.md](HANDOFF_2026-10-11.md).
 
+If you have reached JetBot's Jupyter page, follow [JETBOT_JUPYTER_FIRST_RUN.md](JETBOT_JUPYTER_FIRST_RUN.md) to upload the source, inspect the Nano and run dry-run before configuring hardware.
+
 ## Repository map
 
 ```text
