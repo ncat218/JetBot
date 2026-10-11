@@ -12,12 +12,12 @@ Trong Jupyter, mở **New → Terminal**. Nếu bản Jupyter đang dùng không
 pwd
 ls -lh jetbot_hri_upload.zip
 unzip -l jetbot_hri_upload.zip | head
-unzip -o jetbot_hri_upload.zip -d ~
+unzip jetbot_hri_upload.zip -d ~
 cd ~/jetbot_hri
 ls
 ```
 
-Nếu `ls` không tìm thấy ZIP, kiểm tra thư mục đang đứng bằng `pwd` và đường dẫn file trong Jupyter; đừng chạy `unzip` khi chưa thấy đúng file. Chỉ upload lại source khi không có chương trình JetBot cũ đang chạy.
+Nếu `ls` không tìm thấy ZIP, kiểm tra thư mục đang đứng bằng `pwd` và đường dẫn file trong Jupyter; đừng chạy `unzip` khi chưa thấy đúng file. Nếu `~/jetbot_hri` đã tồn tại, sao lưu `config/calibration.yaml` và log trước khi trả lời câu hỏi ghi đè của `unzip`. Chỉ upload lại source khi không có chương trình JetBot cũ đang chạy.
 
 ## 2. Kiểm tra môi trường trước khi cài thêm package
 
