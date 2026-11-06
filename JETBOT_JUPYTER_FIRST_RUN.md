@@ -2,6 +2,15 @@
 
 Áp dụng khi laptop và JetBot cùng WiFi, bạn đã mở được trang Jupyter của JetBot bằng IP. Các lệnh ở phần **Terminal JetBot** chạy trên Jetson Nano, không chạy trên laptop. Chưa có model weights và `config/calibration.yaml` vẫn còn `TBD`, vì vậy giai đoạn này **không chạy `--mode robot`**.
 
+## Kết nối lại trong một buổi khác
+
+1. Bật JetBot và đợi WiFi kết nối. Laptop cần ở cùng mạng với JetBot.
+2. Mở lại **đúng URL Jupyter đã dùng lần trước**, gồm IP, port và đường dẫn (nếu có). Nếu trang không lên, IP của JetBot có thể đã đổi sau reboot.
+3. Xem danh sách thiết bị đang kết nối trong trang quản trị router để lấy IP hiện tại của JetBot; hoặc cắm màn hình/bàn phím vào JetBot và chạy `hostname -I`. Nếu trước đây đã bật SSH và biết hostname, có thể thử kết nối qua hostname, nhưng chỉ dùng khi mạng của bạn phân giải được tên đó.
+4. Khi đã vào Jupyter, mở **New → Terminal**, chạy `hostname -I` và `pwd` để xác nhận đang thao tác trên JetBot. Đặt DHCP reservation trong router nếu muốn IP ổn định giữa các buổi.
+
+Để dùng pipeline trong Jupyter, bạn **upload cả package Python**, sau đó mở notebook `00_jetbot_first_session.ipynb` nằm trong package. Notebook gọi các module qua Python của chính kernel; không cần chép toàn bộ source vào từng cell.
+
 ## 1. Chuyển source từ laptop qua Jupyter
 
 Trên laptop, upload file `jetbot_hri_upload.zip` bằng nút **Upload** trong file browser Jupyter. File ZIP được tạo từ source ở `C:\Users\ADMIN\Documents\CS532\jetbot_hri` và chứa thư mục `jetbot_hri/` ở cấp trên cùng.
@@ -18,6 +27,8 @@ ls
 ```
 
 Nếu `ls` không tìm thấy ZIP, kiểm tra thư mục đang đứng bằng `pwd` và đường dẫn file trong Jupyter; đừng chạy `unzip` khi chưa thấy đúng file. Nếu `~/jetbot_hri` đã tồn tại, sao lưu `config/calibration.yaml` và log trước khi trả lời câu hỏi ghi đè của `unzip`. Chỉ upload lại source khi không có chương trình JetBot cũ đang chạy.
+
+Sau khi giải nén, vào thư mục `jetbot_hri` bằng file browser Jupyter và mở **`00_jetbot_first_session.ipynb`**. Chạy lần lượt các cell. Notebook sẽ kiểm tra môi trường, cài source, chạy dry-run toàn FSM, unit tests, WiFi và pin mock; nó không chạy motor thật.
 
 ## 2. Kiểm tra môi trường trước khi cài thêm package
 
@@ -56,6 +67,8 @@ Kết quả mong đợi: dry-run in các chuyển trạng thái đến `Dry-run 
 - **Motor:** chưa chạy `scripts.test_motor` cho tới khi đã xác minh pin, địa chỉ I2C, camera, hướng motor và STOP. Khi thử đầu tiên, nhấc bánh khỏi mặt đất, đặt tốc độ thấp trong config và có ngắt nguồn vật lý.
 
 Các chế độ `--mode perception` và `--mode robot` của baseline hiện yêu cầu model pose/collision đã cài đúng định dạng. Chưa có weights trong ZIP, nên hai chế độ đó chưa phải bước tiếp theo. Không bật service tự khởi động lúc này.
+
+Khi đã có camera, model pose và model collision tương thích, thử `--mode perception` **không motor** trước trong Terminal. Sau khi quan sát prediction/log và hiệu chỉnh `calibration.yaml`, thử motor có bánh nhấc khỏi đất rồi mới chạy `--mode robot` thủ công ở tốc độ thấp. Jupyter dùng để quan sát/chạy lệnh; vòng điều khiển thật vẫn là tiến trình `python3 -m jetbot_hri.main` chạy trên Jetson. Đóng notebook nào đang giữ camera/motor trước khi chạy tiến trình đó.
 
 ## 5. Dataset cho né vật cản bạn tự chọn
 

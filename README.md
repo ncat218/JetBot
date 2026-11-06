@@ -6,6 +6,8 @@ Current progress, unverified hardware assumptions and next steps: [HANDOFF_2026-
 
 If you have reached JetBot's Jupyter page, follow [JETBOT_JUPYTER_FIRST_RUN.md](JETBOT_JUPYTER_FIRST_RUN.md) to upload the source, inspect the Nano and run dry-run before configuring hardware.
 
+The repository also includes [00_jetbot_first_session.ipynb](00_jetbot_first_session.ipynb), a no-motor Jupyter walkthrough that invokes the package modules from the JetBot kernel.
+
 ## Repository map
 
 ```text
