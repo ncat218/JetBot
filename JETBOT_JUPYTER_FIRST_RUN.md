@@ -21,12 +21,12 @@ Trong Jupyter, mở **New → Terminal**. Nếu bản Jupyter đang dùng không
 pwd
 ls -lh jetbot_hri_upload.zip
 unzip -l jetbot_hri_upload.zip | head
-unzip jetbot_hri_upload.zip -d ~
-cd ~/jetbot_hri
+unzip jetbot_hri_upload.zip
+cd jetbot_hri
 ls
 ```
 
-Nếu `ls` không tìm thấy ZIP, kiểm tra thư mục đang đứng bằng `pwd` và đường dẫn file trong Jupyter; đừng chạy `unzip` khi chưa thấy đúng file. Nếu `~/jetbot_hri` đã tồn tại, sao lưu `config/calibration.yaml` và log trước khi trả lời câu hỏi ghi đè của `unzip`. Chỉ upload lại source khi không có chương trình JetBot cũ đang chạy.
+Nếu `ls` không tìm thấy ZIP, kiểm tra thư mục đang đứng bằng `pwd` và chuyển Terminal đến thư mục hiển thị ZIP trong file browser Jupyter; đừng chạy `unzip` khi chưa thấy đúng file. Giải nén ngay tại thư mục đó để notebook mới xuất hiện trong file browser. Nếu `jetbot_hri` đã tồn tại ở đó, sao lưu `config/calibration.yaml` và log trước khi trả lời câu hỏi ghi đè của `unzip`. Chỉ upload lại source khi không có chương trình JetBot cũ đang chạy.
 
 Sau khi giải nén, vào thư mục `jetbot_hri` bằng file browser Jupyter và mở **`00_jetbot_first_session.ipynb`**. Chạy lần lượt các cell. Notebook sẽ kiểm tra môi trường, cài source, chạy dry-run toàn FSM, unit tests, WiFi và pin mock; nó không chạy motor thật.
 
