@@ -62,7 +62,7 @@ Kết quả mong đợi: dry-run in các chuyển trạng thái đến `Dry-run 
 ## 4. Kiểm tra từng phần, chưa cho robot chạy
 
 - **WiFi:** `python3 -m scripts.test_wifi`; mong đợi SSID/IP hoặc lỗi có thông tin.
-- **Camera:** trước tiên đóng các notebook đang giữ camera. Sau đó `python3 -m scripts.test_camera`. Script hiện dùng OpenCV `VideoCapture(0)`; nếu JetBot image của bạn dùng GStreamer/JetBot Camera API, lỗi ở bước này **không chứng minh camera hỏng**. Gửi output để sửa camera adapter theo image thật.
+- **Camera:** trước tiên đóng các notebook đang giữ camera. Chạy `python3 -m scripts.test_camera --backend csi_gstreamer --frames 30` để thử camera IMX219 CSI bằng GStreamer. Nếu image dùng backend khác, thử `python3 -m scripts.test_camera --backend opencv --frames 30`. Script lưu `logs/camera_check.jpg` để mở xem trong Jupyter, in kích thước/FPS và không chạy motor. Nếu cả hai lỗi, gửi output; lỗi **không chứng minh camera hỏng**. Cấu hình backend chạy thật ở `config/calibration.yaml` mục `camera.backend`.
 - **Pin:** nếu đã có `i2c-tools`, chạy `i2cdetect -y -r 1`; nếu chưa có, cài bằng package manager trên JetBot. Chỉ điền `battery.i2c_address` theo thiết bị vừa quét, rồi cài `pi-ina219`/`smbus2` tương thích và chạy `python3 -m scripts.test_battery --config config/calibration.yaml`. Có thể chạy mock trước: `python3 -m scripts.test_battery --mock`.
 - **Motor:** chưa chạy `scripts.test_motor` cho tới khi đã xác minh pin, địa chỉ I2C, camera, hướng motor và STOP. Khi thử đầu tiên, nhấc bánh khỏi mặt đất, đặt tốc độ thấp trong config và có ngắt nguồn vật lý.
 

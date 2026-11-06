@@ -11,4 +11,4 @@ decision: {min_dwell_sec: TBD, gesture_gap_grace_sec: TBD, timeout_sec: TBD}
 avoid: {max_attempts: TBD, timeout_sec: TBD, turn_side: TBD, turn_pulse_sec: TBD, settle_sec: TBD, commit_forward_sec: TBD}
 recovery: {owner_lost_sec: TBD, fov_limit_sec: TBD, scan_blocked_sec: TBD}
 collision: {roi: TBD, model_path: TBD, threshold: TBD}
-camera: {source: 0, width: 640, height: 480}
+camera: {backend: opencv, source: 0, width: 640, height: 480, fps: 30}

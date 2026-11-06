@@ -128,18 +128,15 @@ def draw_overlay(frame, fsm, obs, battery, wifi, safety):
 
 def run_camera(config, mode, log, show, dashboard_port):
     import cv2
+    from .camera import open_camera
     from .perception import TRTPOSEBackend, CollisionModelBackend, ObservationBuilder
     pose = TRTPOSEBackend(config["pose"])
     collision = CollisionModelBackend(config["collision"])
-    capture = cv2.VideoCapture(config["camera"]["source"])
-    if not capture.isOpened():
-        raise RuntimeError("Camera could not open; check IMX219 / GStreamer source")
+    capture = open_camera(config["camera"])
     battery = None
     motor = None
     dashboard = None
     try:
-        capture.set(cv2.CAP_PROP_FRAME_WIDTH, config["camera"]["width"])
-        capture.set(cv2.CAP_PROP_FRAME_HEIGHT, config["camera"]["height"])
         if mode == "robot":
             battery = BatteryMonitor(INA219Backend(config["battery"]), config["battery"])
             for _ in range(config["battery"]["filter_window"]):

@@ -109,10 +109,12 @@ Battery policy uses a five-sample median and a sustained low interval. Below 10.
 ## Step 4 — camera (JetBot)
 
 ```bash
-python3 -m scripts.test_camera
+python3 -m scripts.test_camera --backend csi_gstreamer --frames 30
+# Nếu JetBot image dùng /dev/video0, thử:
+python3 -m scripts.test_camera --backend opencv --frames 30
 ```
 
-Expected: one frame shape. If capture fails, validate the CSI ribbon, camera support and `camera.source` for the actual GStreamer or V4L2 pipeline. Camera failure stops the robot loop. Frame age over `safety.max_frame_age_sec` closes the motion gate.
+Expected: frame shape, measured FPS and `logs/camera_check.jpg` to inspect from Jupyter. Set `camera.backend` in `config/calibration.yaml` to the working backend (`csi_gstreamer` or `opencv`). If capture fails, validate the CSI ribbon, camera support and actual GStreamer/V4L2 pipeline. Camera failure stops the robot loop. Frame age over `safety.max_frame_age_sec` closes the motion gate. The CSI pipeline follows [NVIDIA's IMX219 OpenCV example](https://github.com/NVIDIA-AI-IOT/jetbot/issues/546); it still needs validation on this robot.
 
 ## Step 5 — motor STOP and low-speed pulse (JetBot)
 
